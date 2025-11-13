@@ -1,6 +1,6 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
+import { unstable_HistoryRouter as HistoryRouter, Routes, Route } from "react-router-dom";
+import { history } from "./history";
 import MessagePage from './pages/MessagePage';
 import LoveStoryPage from './pages/LoveStoryPage';
 import ThreeDHeartPage from './pages/ThreeDHeartPage';
@@ -10,9 +10,10 @@ import Home from './pages/Home';
 import BirthdayCard from './components/BirthdayCard';
 import AppLayout from './AppLayout';
 
+const base = window.location.pathname.split("/")[1] || "";  
 export default function App() {
   return (
-    <Router>
+     <HistoryRouter history={history} basename={`/${base}`}>
       <Routes>
         <Route element={<AppLayout />}>
         <Route path="/" element={<Home />} />
@@ -24,6 +25,6 @@ export default function App() {
         <Route path="/boom" element={<BirthdayCard />} />
         </Route>
       </Routes>
-    </Router>
+    </HistoryRouter>
   );
 }
