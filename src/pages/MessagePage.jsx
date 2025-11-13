@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Heart, Sparkles, Camera, ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FloatingHearts from '../components/FloatingHearts';
-import { ROMANTIC_MESSAGE } from '../data/romanticMessage';
+import { ROMANTIC_MESSAGE, ROMANTIC_WISH } from '../data/romanticMessage';
+import FlipMessageCard from '../components/FlipMessageCard';
 
 export default function MessagePage() {
   const [hearts, setHearts] = useState([]);
@@ -81,11 +82,7 @@ export default function MessagePage() {
         </div>
 
         {/* Message */}
-        <div className="bg-gradient-to-br from-pink-50 to-rose-50 rounded-2xl p-6 md:p-8 shadow-inner mb-6">
-          <pre className="text-gray-800 whitespace-pre-wrap font-sans text-base md:text-lg leading-relaxed">
-            {ROMANTIC_MESSAGE}
-          </pre>
-        </div>
+        <FlipMessageCard FRONT_MESSAGE={ROMANTIC_MESSAGE} BACK_MESSAGE={ROMANTIC_WISH}/>
 
         {/* Navigation buttons */}
         <div className="flex gap-4 justify-center flex-wrap">

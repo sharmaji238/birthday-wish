@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Sparkles, Lock, Heart } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import FloatingHearts from '../components/FloatingHearts';
+import jayQR from "../assets/images/greetJaya.svg"
 
 export default function Home() {
   const [passphrase, setPassphrase] = useState('');
@@ -114,7 +115,7 @@ export default function Home() {
         >
           <div className="flex justify-center mb-4">
             <img
-              src={qrCodeUrl}
+              src={jayQR}
               alt="QR Code"
               className="rounded-lg shadow-lg"
             />

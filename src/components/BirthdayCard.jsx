@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function BirthdayCard() {
   const [showContent, setShowContent] = useState(false);
-  const [secondsLeft, setSecondsLeft] = useState(8);
+  const [secondsLeft, setSecondsLeft] = useState(6);
   const [isPaused, setIsPaused] = useState(false);
   const navigate = useNavigate();
   const intervalRef = useRef(null);
