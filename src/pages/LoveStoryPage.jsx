@@ -131,12 +131,12 @@ export default function LoveStoryPage() {
         </div>
        {/* Navigation Buttons */}
 {!isLastStep ? (
-  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-6 w-full px-4">
+  <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-6 w-full px-8">
     {/* Previous */}
     {loveStep > 0 && (
       <button
         onClick={() => setLoveStep(loveStep - 1)}
-        className="group flex items-center justify-center gap-2 px-6 sm:px-10 py-3 sm:py-4 bg-white text-gray-800 rounded-full font-semibold sm:font-bold text-lg sm:text-xl shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
+        className="group flex items-center justify-center gap-2 px-10 sm:px-10 py-3 sm:py-4 bg-white text-gray-800 rounded-full font-semibold sm:font-bold text-lg sm:text-xl shadow-xl hover:scale-105 active:scale-95 transition-all duration-300"
         style={{ animation: 'bounce 2s ease-in-out infinite' }}
       >
         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 rotate-180 group-hover:-translate-x-1 transition-transform" />

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function BirthdayCard() {
   const [showContent, setShowContent] = useState(false);
-  const [secondsLeft, setSecondsLeft] = useState(6);
+  const [secondsLeft, setSecondsLeft] = useState(5);
   const [isPaused, setIsPaused] = useState(false);
   const navigate = useNavigate();
   const intervalRef = useRef(null);
@@ -17,9 +17,9 @@ export default function BirthdayCard() {
     return () => clearInterval(intervalRef.current);
   }, []);
 
- 
 
-    const startCountdown = () => {
+
+  const startCountdown = () => {
     clearInterval(intervalRef.current);
     intervalRef.current = setInterval(() => {
       setSecondsLeft((prev) => {
@@ -44,29 +44,53 @@ export default function BirthdayCard() {
       return newPaused;
     });
   };
+  const holdTime = 500; // how long to hold (ms)
+  let holdTimeout;
+
+  const handleHoldStart = () => {
+    // Start counting hold time
+    holdTimeout = setTimeout(() => {
+      handleToggle();  // Trigger your action
+    }, holdTime);
+  };
+
+  const handleHoldEnd = () => {
+    // If released early → cancel
+    clearTimeout(holdTimeout);
+  };
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-500 flex items-center justify-center p-8 overflow-hidden relative">
-      
+    <div
+      onTouchStart={handleHoldStart}
+      onTouchEnd={handleHoldEnd}
+      onMouseDown={handleHoldStart}     // for desktop
+      onMouseUp={handleHoldEnd}
+      onMouseLeave={handleHoldEnd}
+      className={`w-screen h-screen bg-gradient-to-br from-yellow-300 via-pink-400 to-purple-500 flex items-center justify-center p-8 overflow-hidden relative
+       &{isPaused
+      ? "bg-purple-700 text-white hover:bg-purple-600"
+      : "bg-white text-purple-700 hover:bg-purple-100"
+  }`}>
+
       {/* Countdown / Pause-Resume Button */}
-      <button
+      {/* <button
         onClick={handleToggle}
-        className={`absolute top-6 right-6 z-50 font-bold rounded-full px-6 py-3 shadow-2xl transition-all duration-300 cursor-pointer ${
-          isPaused
+        className={`absolute top-6 right-6 z-50 font-bold rounded-full px-6 py-3 shadow-2xl transition-all duration-300 cursor-pointer ${isPaused
             ? "bg-purple-700 text-white hover:bg-purple-600"
             : "bg-white text-purple-700 hover:bg-purple-100"
-        }`}
+          }`}
       >
         {isPaused
           ? `Paused (${secondsLeft}s)`
           : `Next in (${secondsLeft}s)`}
-      </button>
+      </button> */}
 
-      <div className={`text-center space-y-8 relative z-10 ${showContent ? 'animate-in' : 'hidden-initial'}`}>
+      <div className={`h-90 w-90 text-center space-y-8 relative z-10 ${showContent ? 'animate-in' : 'hidden-initial'}`}>
         {/* Happy Birthday - BOOM effect */}
         <div style={{ animation: 'boom 1.2s ease-out' }}>
-          <h1 
+          <h1
             className="text-6xl md:text-8xl font-black text-white"
-            style={{ 
+            style={{
               fontFamily: "'Comic Sans MS', cursive",
               textShadow: '4px 4px 0px #ff1493, 8px 8px 0px #00bfff',
               letterSpacing: '0.1em'
@@ -78,10 +102,10 @@ export default function BirthdayCard() {
 
         {/* Jaya - MEGA BOOM */}
         <div style={{ animation: 'mega-boom 1.5s ease-out 0.3s backwards' }}>
-          <h2 
+          <h2
             className="text-9xl md:text-[14rem] font-black text-white"
-            style={{ 
-              fontFamily: "'Comic Sans MS', cursive",
+            style={{
+              fontFamily: "'Comic Sans MS', 'Brush Script MT'cursive",
               textShadow: '6px 6px 0px #ff6b6b, 12px 12px 0px #4ecdc4',
               letterSpacing: '0.08em'
             }}
@@ -93,10 +117,10 @@ export default function BirthdayCard() {
         {/* 17 November - Pop in */}
         <div style={{ animation: 'pop-in 0.8s ease-out 0.8s backwards' }}>
           <div className="inline-block bg-white rounded-3xl px-8 py-4 shadow-2xl">
-            <p 
+            <p
               className="text-4xl md:text-5xl font-bold text-purple-600"
-              style={{ 
-                fontFamily: "'Comic Sans MS', cursive"
+              style={{
+                fontFamily: "'Comic Sans MS', Pacifico', cursive"
               }}
             >
               🎂 17 November 🎂
@@ -108,19 +132,19 @@ export default function BirthdayCard() {
         <div className="mt-12" style={{ animation: 'explosive-zoom 1s ease-out 1.2s backwards' }}>
           <div className="inline-block bg-yellow-400 border-8 border-white rounded-full px-10 py-6 shadow-2xl"
             style={{ animation: 'continuous-pulse 2s ease-in-out 2.5s infinite' }}>
-            <p 
-              className="text-6xl md:text-7xl font-black text-purple-700"
-              style={{ 
-                fontFamily: "'Comic Sans MS', cursive"
+            <p
+              className="text-2xl md:text-7xl font-black text-purple-700"
+              style={{
+                fontFamily: "'Comic Sans MS', 'Brush Script MT'cursive",
               }}
             >
-              YOU TURN 26!
+              2K25 - You Turn 26!
             </p>
           </div>
         </div>
 
         {/* Emojis - Burst in */}
-        <div className="flex justify-center gap-6 text-6xl mt-8" 
+        <div className="flex justify-center gap-6 text-3xl mt-8"
           style={{ animation: 'burst-in 0.6s ease-out 1.6s backwards' }}>
           <span style={{ animation: 'bounce-crazy 1s ease-in-out 2s infinite' }}>🎉</span>
           <span style={{ animation: 'bounce-crazy 1s ease-in-out 2.1s infinite' }}>🎈</span>
@@ -128,6 +152,18 @@ export default function BirthdayCard() {
           <span style={{ animation: 'bounce-crazy 1s ease-in-out 2.3s infinite' }}>🎁</span>
           <span style={{ animation: 'bounce-crazy 1s ease-in-out 2.4s infinite' }}>✨</span>
         </div>
+        <button
+          onClick={handleToggle}
+          className={` bottom-0 right-6 z-50 font-bold rounded-full px-6 py-3 shadow-2xl transition-all duration-300 cursor-pointer ${isPaused
+            ? "bg-purple-700 text-white hover:bg-purple-600"
+            : "bg-white text-purple-700 hover:bg-purple-100"
+            }`}
+        >
+          {isPaused
+            ? `Paused (${secondsLeft}s)`
+            : `Next in (${secondsLeft}s)`}
+        </button>
+
       </div>
 
       <style jsx>{`

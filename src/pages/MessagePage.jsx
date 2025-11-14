@@ -22,12 +22,12 @@ export default function MessagePage() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 flex items-center justify-center p-4 overflow-hidden relative">
+    <div className="min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-red-500 p-3 sm:p-4 relative overflow-y-auto flex justify-center">
       <FloatingHearts hearts={hearts} opacity={0.3} />
 
       <style>{`
         @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px) scale(0.9); }
+          from { opacity: 0; transform: translateY(20px) scale(0.95); }
           to { opacity: 1; transform: translateY(0) scale(1); }
         }
         @keyframes heartbeat {
@@ -40,29 +40,26 @@ export default function MessagePage() {
         }
       `}</style>
 
-      <div 
-        className="bg-white rounded-3xl shadow-2xl p-8 md:p-12 max-w-2xl w-full relative z-10"
-        style={{ 
+      <div
+        className="bg-white rounded-3xl shadow-2xl p-4 sm:p-6 md:p-8 max-w-md w-full relative z-10 flex flex-col gap-6" style={{
           animation: 'fadeIn 1s ease-out',
           background: 'linear-gradient(135deg, #ffffff 0%, #fff5f7 100%)',
-          boxShadow: '0 30px 80px rgba(0,0,0,0.3)'
+          boxShadow: '0 30px 80px rgba(0,0,0,0.25)'
         }}
       >
-        {/* Decorative hearts */}
-        <div className="absolute top-4 right-4">
-          <Heart className="text-pink-500 w-12 h-12 fill-pink-500" style={{ animation: 'heartbeat 1s infinite' }} />
+
+        {/* Floating Decorations */}
+        <div className="absolute top-3 right-3 sm:top-4 sm:right-4">
+          <Heart className="text-pink-500 w-10 h-10 sm:w-12 sm:h-12 fill-pink-500" style={{ animation: 'heartbeat 1s infinite' }} />
         </div>
-        <div className="absolute bottom-4 left-4">
-          <Heart className="text-rose-500 w-8 h-8 fill-rose-500" style={{ animation: 'heartbeat 1s infinite 0.3s' }} />
-        </div>
-        <div className="absolute top-1/2 left-4">
-          <Sparkles className="text-yellow-400 w-6 h-6" style={{ animation: 'heartbeat 1.5s infinite 0.6s' }} />
+        <div className="absolute bottom-3 left-3">
+          <Heart className="text-rose-500 w-6 h-6 sm:w-8 sm:h-8 fill-rose-500" style={{ animation: 'heartbeat 1s infinite 0.3s' }} />
         </div>
 
         {/* Header */}
-        <div className="text-center mb-8">
-          <h2 
-            className="text-4xl md:text-5xl font-bold mb-4"
+        <div className="text-center mb-6 sm:mb-8">
+          <h2
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-3"
             style={{
               background: 'linear-gradient(90deg, #ec4899, #ef4444, #ec4899)',
               backgroundSize: '200% auto',
@@ -74,44 +71,46 @@ export default function MessagePage() {
           >
             You Found It! 💝
           </h2>
-          <div className="flex justify-center gap-2">
-            <Sparkles className="text-yellow-400" style={{ animation: 'heartbeat 1s infinite' }} />
-            <Sparkles className="text-pink-400" style={{ animation: 'heartbeat 1s infinite 0.3s' }} />
-            <Sparkles className="text-rose-400" style={{ animation: 'heartbeat 1s infinite 0.6s' }} />
+
+          <div className="flex justify-center gap-1 sm:gap-2">
+            <Sparkles className="text-yellow-400 w-4 h-4 sm:w-5 sm:h-5" style={{ animation: 'heartbeat 1s infinite' }} />
+            <Sparkles className="text-pink-400 w-4 h-4 sm:w-5 sm:h-5" style={{ animation: 'heartbeat 1s infinite 0.3s' }} />
+            <Sparkles className="text-rose-400 w-4 h-4 sm:w-5 sm:h-5" style={{ animation: 'heartbeat 1s infinite 0.6s' }} />
           </div>
         </div>
 
-        {/* Message */}
-        <FlipMessageCard FRONT_MESSAGE={ROMANTIC_MESSAGE} BACK_MESSAGE={ROMANTIC_WISH}/>
+        {/* Message Card */}
+        <FlipMessageCard FRONT_MESSAGE={ROMANTIC_MESSAGE} BACK_MESSAGE={ROMANTIC_WISH} />
 
-        {/* Navigation buttons */}
-        <div className="flex gap-4 justify-center flex-wrap">
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-10 sm:mt-12">
           <button
             onClick={() => navigate('/love')}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 rounded-full text-white font-semibold shadow-lg hover:scale-105 transition-transform"
+            className="flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-pink-500 via-rose-500 to-red-500 rounded-full text-white font-semibold shadow-lg hover:scale-105 transition-transform text-sm sm:text-base"
             style={{ animation: 'heartbeat 2s infinite' }}
           >
             <Heart className="w-5 h-5 fill-white" />
             How Long Will I Love You?
-            <ChevronRight className="w-5 h-5" />
+            <ChevronRight className="w-4 h-4" />
           </button>
 
           <button
             onClick={() => navigate('/gallery')}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-semibold shadow-lg hover:scale-105 transition-transform"
+            className="flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full text-white font-semibold shadow-lg hover:scale-105 transition-transform text-sm sm:text-base"
           >
             <Camera className="w-5 h-5" />
             View Memories
           </button>
 
           <button
-            onClick={() => navigate('/3d')}
-            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full text-white font-semibold shadow-lg hover:scale-105 transition-transform"
+            onClick={() => navigate('/')}
+            className="flex items-center justify-center gap-2 px-5 py-3 bg-gradient-to-r from-indigo-500 to-purple-500 rounded-full text-white font-semibold shadow-lg hover:scale-105 transition-transform text-sm sm:text-base"
           >
             <Sparkles className="w-5 h-5" />
-            3D Experience
+           Home
           </button>
         </div>
+
       </div>
     </div>
   );

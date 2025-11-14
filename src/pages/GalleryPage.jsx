@@ -50,7 +50,7 @@ export default function GalleryPage() {
                 <img
                   src={photo.url}
                   alt={photo.caption}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-700"
+                  className="w-full h-full  object-contain hover:scale-100 transition-transform duration-700"
                 />
               </div>
               <div className="p-4 bg-gradient-to-r from-pink-50 to-rose-50">
