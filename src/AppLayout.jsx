@@ -1,7 +1,6 @@
 import React from 'react';
 import { useNavigate, Outlet, useLocation } from 'react-router-dom';
 import BackgroundMusic from './components/Backgroundmusic';
-import HBDMusic from './assets/audio/HBDsong.mpeg'
 
 export default function AppLayout() {
   const navigate = useNavigate();
@@ -15,7 +14,7 @@ export default function AppLayout() {
   return (
     <div className="m ax-h-screen h-screen w-screen max-w-screen w-full relative flex flex-col">
       {/* <BackgroundMusic src={HBDMusic} /> */}
-      <BackgroundMusic src="/HBDsong.mpeg" />
+      <BackgroundMusic src="/audio/hbd_bgm.mp3" />
 
       {!hideBack && (
         <button
