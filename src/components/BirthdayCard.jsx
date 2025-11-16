@@ -138,7 +138,7 @@ export default function BirthdayCard() {
                 fontFamily: "'Comic Sans MS', 'Brush Script MT'cursive",
               }}
             >
-              2K25 - You Turn 26!
+              "2K25. Level 26: Unlocked. 🎮
             </p>
           </div>
         </div>
